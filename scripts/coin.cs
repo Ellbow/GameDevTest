@@ -10,7 +10,6 @@ public partial class coin : Area2D
 	{
 
 		BodyEntered += OnBodyEntered;
-
 		
 	}
 
@@ -25,5 +24,6 @@ public partial class coin : Area2D
 	{
 		count++;
 		GD.Print("body entereed " + count);
+		QueueFree();
 	}
 }
