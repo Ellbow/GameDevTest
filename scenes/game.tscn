@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxbpcbgcfkq4b"]
+[gd_scene load_steps=12 format=3 uid="uid://bxbpcbgcfkq4b"]
 
 [ext_resource type="PackedScene" uid="uid://7g8up4bly0o6" path="res://scenes/player.tscn" id="1_jadx6"]
 [ext_resource type="Texture2D" uid="uid://7j6rwyyg42h3" path="res://assets/sprites/world_tileset.png" id="2_h3nwg"]
 [ext_resource type="PackedScene" uid="uid://cynjmomhynoor" path="res://scenes/platform.tscn" id="3_6g08a"]
 [ext_resource type="PackedScene" uid="uid://cqwrw0mcsygqb" path="res://scenes/coin.tscn" id="4_is252"]
+[ext_resource type="PackedScene" uid="uid://pacbta788327" path="res://scenes/killzone.tscn" id="5_tu78p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5osn5"]
 texture = ExtResource("2_h3nwg")
@@ -403,8 +404,6 @@ texture = ExtResource("2_h3nwg")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5osn5")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vsscj"]
-
 [sub_resource type="Animation" id="Animation_vatqx"]
 length = 0.001
 tracks/0/type = "value"
@@ -443,6 +442,9 @@ _data = {
 "move": SubResource("Animation_gyywl")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lm42h"]
+distance = 16.0
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -456,15 +458,9 @@ position = Vector2(1, -1)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
 zoom = Vector2(4, 4)
+limit_bottom = 48
+limit_smoothed = true
 position_smoothing_enabled = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
-position = Vector2(0, 18)
-shape = SubResource("WorldBoundaryShape2D_vsscj")
 
 [node name="Platform" parent="." instance=ExtResource("3_6g08a")]
 position = Vector2(64, -23)
@@ -492,3 +488,10 @@ position = Vector2(198, -92)
 
 [node name="Coin5" parent="." instance=ExtResource("4_is252")]
 position = Vector2(-34, -69)
+
+[node name="Killzone" parent="." instance=ExtResource("5_tu78p")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(8, 80)
+shape = SubResource("WorldBoundaryShape2D_lm42h")
