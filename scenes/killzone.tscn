@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scripts/killzone.cs" id="1_apne7"]
 
 [node name="Killzone" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_apne7")
