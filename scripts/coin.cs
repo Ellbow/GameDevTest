@@ -4,8 +4,6 @@ using System.Threading;
 
 public partial class coin : Area2D
 {
-	int count = 0;
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,8 +19,7 @@ public partial class coin : Area2D
 
 	private void OnBodyEntered(Node body)
 	{
-		count++;
-		GD.Print("body entereed " + count);
+		GD.Print("coin get");
 		QueueFree();
 	}
 }

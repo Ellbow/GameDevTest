@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxbpcbgcfkq4b"]
+[gd_scene load_steps=14 format=3 uid="uid://bxbpcbgcfkq4b"]
 
 [ext_resource type="PackedScene" uid="uid://7g8up4bly0o6" path="res://scenes/player.tscn" id="1_jadx6"]
 [ext_resource type="Texture2D" uid="uid://7j6rwyyg42h3" path="res://assets/sprites/world_tileset.png" id="2_h3nwg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cqwrw0mcsygqb" path="res://scenes/coin.tscn" id="4_is252"]
 [ext_resource type="PackedScene" uid="uid://pacbta788327" path="res://scenes/killzone.tscn" id="5_tu78p"]
 [ext_resource type="PackedScene" uid="uid://dkpo3vwgg26r0" path="res://scenes/green_slime.tscn" id="6_iao0t"]
+[ext_resource type="FontFile" uid="uid://bl4egehle5gnl" path="res://assets/fonts/PixelOperator8.ttf" id="7_2ypr8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5osn5"]
 texture = ExtResource("2_h3nwg")
@@ -48,15 +49,15 @@ texture = ExtResource("2_h3nwg")
 9:0/0 = 0
 9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:0/0/physics_layer_0/angular_velocity = 0.0
-9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -6.5, 8, -0.125, -8, -1.25)
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -5.5, 8, 8, -8, 8)
 10:0/0 = 0
 10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:0/0/physics_layer_0/angular_velocity = 0.0
-10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -5.875, 8, 0.625, -8, 0.75)
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.5, 8, -5.5, 8, 8, -8, 8)
 11:0/0 = 0
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
-11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.125, 8, -8, 8, -2.25, -8, -0.5)
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.5, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
@@ -420,7 +421,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(145, -64)]
+"values": [Vector2(148, -50)]
 }
 
 [sub_resource type="Animation" id="Animation_gyywl"]
@@ -437,7 +438,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(145, -64), Vector2(64, -64)]
+"values": [Vector2(148, -50), Vector2(64, -50)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8fssg"]
@@ -495,7 +496,7 @@ position = Vector2(-34, -69)
 position = Vector2(64, -23)
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("3_6g08a")]
-position = Vector2(145, -64)
+position = Vector2(148, -50)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform2"]
 libraries = {
@@ -505,3 +506,23 @@ autoplay = "move"
 
 [node name="Green Slime" parent="." instance=ExtResource("6_iao0t")]
 position = Vector2(64, -12)
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = -104.0
+offset_top = -28.0
+offset_right = -10.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("7_2ypr8")
+theme_override_font_sizes/font_size = 8
+text = "Space to Jump"
+
+[node name="Label2" type="Label" parent="Labels"]
+offset_left = 93.0
+offset_top = -28.0
+offset_right = 211.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("7_2ypr8")
+theme_override_font_sizes/font_size = 8
+text = "WASD / ^v<> to move"
