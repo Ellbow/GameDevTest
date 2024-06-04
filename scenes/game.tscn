@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxbpcbgcfkq4b"]
+[gd_scene load_steps=17 format=3 uid="uid://bxbpcbgcfkq4b"]
 
+[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_hnxfh"]
 [ext_resource type="PackedScene" uid="uid://7g8up4bly0o6" path="res://scenes/player.tscn" id="1_jadx6"]
 [ext_resource type="Texture2D" uid="uid://7j6rwyyg42h3" path="res://assets/sprites/world_tileset.png" id="2_h3nwg"]
 [ext_resource type="PackedScene" uid="uid://cynjmomhynoor" path="res://scenes/platform.tscn" id="3_6g08a"]
@@ -7,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://pacbta788327" path="res://scenes/killzone.tscn" id="5_tu78p"]
 [ext_resource type="PackedScene" uid="uid://dkpo3vwgg26r0" path="res://scenes/green_slime.tscn" id="6_iao0t"]
 [ext_resource type="FontFile" uid="uid://bl4egehle5gnl" path="res://assets/fonts/PixelOperator8.ttf" id="7_2ypr8"]
+[ext_resource type="PackedScene" uid="uid://d28yb580ygbjd" path="res://scenes/global.tscn" id="9_5ujd2"]
+[ext_resource type="FontFile" uid="uid://d2xvx86ijxiyf" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_6pdqt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5osn5"]
 texture = ExtResource("2_h3nwg")
@@ -449,6 +452,10 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_hnxfh")
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_lcmyl")
 format = 2
@@ -458,7 +465,8 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array(65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 131068, 0, 1, 131069, 0, 1, 131070, 0, 1, 131071, 0, 1, 65536, 0, 1, 65537, 0, 1, 65538, 0, 1, 65539, 0, 1, 65540, 0, 1, 131075, 0, 1, 131074, 0, 1, 131073, 0, 1, 131072, 0, 1, 196607, 0, 1, 196606, 0, 1, 196605, 0, 1, 196604, 0, 1, 131076, 0, 1, 65533, 0, 0, 65532, 0, 0, 4, 0, 0, 3, 0, 0, 5, 393216, 0, 6, 393216, 0, 7, 393216, 0, 65541, 393216, 1, 65542, 393216, 1, 131078, 393216, 1, 131079, 393216, 1, 65543, 393216, 1, 131077, 393216, 1, 65547, 393216, 1, 131083, 393216, 1, 131084, 393216, 1, 65548, 393216, 1, 8, 589824, 0, 9, 655360, 0, 65529, 589824, 0, 65530, 655360, 0, 65531, 720896, 0, 12, 393216, 0, 11, 393216, 0, -196596, 524288, 1, -262132, 524288, 1, -327668, 524288, 1, -327669, 524288, 1, -262133, 524288, 1, -262131, 524288, 1, -327667, 524288, 1, 65528, 131072, 0, 65527, 131072, 0, 65526, 131072, 0, -8, 196608, 0, -9, 196608, 0, -65545, 196608, 0, -65546, 196608, 0, -10, 196608, 0, -131082, 196608, 0, -131081, 196608, 0, -65544, 196608, 0, -11, 196608, 0, -65547, 196608, 0, -131083, 196608, 0, -196619, 196608, 0, -262155, 196608, 0, 10, 720896, 0, 13, 393216, 0, 65549, 393216, 0, 131085, 393216, 0, 14, 393216, 0, -65522, 393216, 0, -131058, 393216, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_jadx6")]
-position = Vector2(1, -1)
+input_pickable = true
+slide_on_ceiling = false
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, 1)
@@ -526,3 +534,16 @@ offset_bottom = 21.0
 theme_override_fonts/font = ExtResource("7_2ypr8")
 theme_override_font_sizes/font_size = 8
 text = "WASD / ^v<> to move"
+
+[node name="Score" type="Label" parent="Labels"]
+offset_left = -40.0
+offset_top = -63.0
+offset_right = 78.0
+offset_bottom = -14.0
+theme_override_fonts/font = ExtResource("9_6pdqt")
+theme_override_font_sizes/font_size = 8
+text = "Collected x coins"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Global" parent="." instance=ExtResource("9_5ujd2")]
