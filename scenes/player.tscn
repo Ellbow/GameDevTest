@@ -169,7 +169,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dhxng"]
-size = Vector2(10, 16)
+size = Vector2(10, 15)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -177,7 +177,6 @@ script = ExtResource("1_gbqlo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
-position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_fndgh")
 animation = &"idle"
 autoplay = "idle"
@@ -186,5 +185,5 @@ frame_progress = 0.726371
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
-position = Vector2(0, -8)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_dhxng")

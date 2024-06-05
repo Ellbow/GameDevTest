@@ -5,7 +5,7 @@ public partial class GameManager : Node
 {
     int score = 0;
 
-    Label scoreLabel => GetNode<Label>("Score");
+    Label scoreLabel => GetNode<Label>("/root/Level1/Labels/Score");
 
     public void IncreaseScore(int addedScoreValue)
     {
@@ -17,4 +17,6 @@ public partial class GameManager : Node
     {
         return score;
     }
+
+    
 }
