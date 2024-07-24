@@ -2,34 +2,19 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Launch (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${env:GODOT4}",
             "args": [],
+            // "args": [
+            //     "--path",
+            //     "${workspaceRoot}"
+            // ]
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole",
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-        },
-/*         {
-            "name": "Launch",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${env:GODOT4}",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "args": [
-                "--path",
-                "${workspaceRoot}"
-            ]
         },
         {
             "name": "Launch (Select Scene)",
@@ -47,6 +32,13 @@
             ]
         },
         {
+            "name": "Attach to Process",
+            "type": "coreclr",
+            "request": "attach",
+        },
+
+        /*
+        {
             "name": "Launch Editor",
             "type": "coreclr",
             "request": "launch",
@@ -61,10 +53,6 @@
                 "--editor"
             ]
         },
-        {
-            "name": "Attach to Process",
-            "type": "coreclr",
-            "request": "attach"
-        } */
+        */
     ]
 }

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://btaf4iwhstqdy"
+path="res://.godot/imported/frog-Sheet.aseprite-95fbc6e202085b508f7dd22488d3620c.res"
+
+[deps]
+
+source_file="res://assets/sprites/frog-Sheet.aseprite"
+dest_files=["res://.godot/imported/frog-Sheet.aseprite-95fbc6e202085b508f7dd22488d3620c.res"]
+
+[params]
+

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://csgl566fo61po"]
+
+[ext_resource type="Texture2D" uid="uid://c5k2timuxt3v4" path="res://assets/sprites/blockguy.png" id="1_65yba"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o74s"]
+atlas = ExtResource("1_65yba")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_no5sh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3o74s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkagk"]
+size = Vector2(16, 16)
+
+[node name="player2" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_no5sh")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"output_section": true,
+"slice_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://assets/sprites",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://assets/sprites/aseprites/blockguy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "54ddf331d20c19ab28b421f89ab00e3f"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_mkagk")
+one_way_collision_margin = 0.0

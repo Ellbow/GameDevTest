@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dfhlgx0vb2mtx"
+path="res://.godot/imported/blockguy.aseprite-e8c43b8dfcf7ff6307455c6a8c24ac80.res"
+
+[deps]
+
+source_file="res://assets/sprites/aseprites/blockguy.aseprite"
+dest_files=["res://.godot/imported/blockguy.aseprite-e8c43b8dfcf7ff6307455c6a8c24ac80.res"]
+
+[params]
+
