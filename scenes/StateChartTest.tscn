@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy73rcn5xc1yg"]
+[gd_scene load_steps=14 format=3 uid="uid://cy73rcn5xc1yg"]
 
 [ext_resource type="Texture2D" uid="uid://crd3xxsji4l7l" path="res://icon.svg" id="1_6rwdi"]
 [ext_resource type="Script" path="res://scripts/Watchman.cs" id="1_jxwfn"]
@@ -6,11 +6,17 @@
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="2_mjoha"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wbe8m"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_iefvt"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="5_bu4pk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_t72sy"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ka4my"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="9_o2bfb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxe7w"]
 radius = 299.015
+
+[sub_resource type="Resource" id="Resource_3ndwj"]
+script = ExtResource("9_o2bfb")
+expression = "enemyEnteredCount > 2"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5m2nj"]
 radius = 299.015
@@ -40,28 +46,55 @@ shape = SubResource("CircleShape2D_yxe7w")
 
 [node name="StateChart" type="Node" parent="Watchman"]
 script = ExtResource("3_wbe8m")
+track_in_editor = true
 
 [node name="Root" type="Node" parent="Watchman/StateChart"]
+script = ExtResource("5_bu4pk")
+
+[node name="AlertState" type="Node" parent="Watchman/StateChart/Root"]
 script = ExtResource("4_iefvt")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Watchman/StateChart/Root"]
+[node name="Idle" type="Node" parent="Watchman/StateChart/Root/AlertState"]
 script = ExtResource("5_t72sy")
 
-[node name="ToObserving" type="Node" parent="Watchman/StateChart/Root/Idle"]
+[node name="ToObserving" type="Node" parent="Watchman/StateChart/Root/AlertState/Idle"]
 script = ExtResource("6_ka4my")
 to = NodePath("../../Observing")
 event = &"EnemyEntered"
 delay_in_seconds = "0.0"
 
-[node name="Observing" type="Node" parent="Watchman/StateChart/Root"]
+[node name="Observing" type="Node" parent="Watchman/StateChart/Root/AlertState"]
 script = ExtResource("5_t72sy")
 
-[node name="ToIdle" type="Node" parent="Watchman/StateChart/Root/Observing"]
+[node name="ToIdle" type="Node" parent="Watchman/StateChart/Root/AlertState/Observing"]
 script = ExtResource("6_ka4my")
 to = NodePath("../../Idle")
 event = &"EnemyExited"
+delay_in_seconds = "3"
+
+[node name="BerserkState" type="Node" parent="Watchman/StateChart/Root"]
+script = ExtResource("4_iefvt")
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="Watchman/StateChart/Root/BerserkState"]
+script = ExtResource("5_t72sy")
+
+[node name="ToBerserk" type="Node" parent="Watchman/StateChart/Root/BerserkState/Normal"]
+script = ExtResource("6_ka4my")
+to = NodePath("../../Berserk")
+event = &"EnemyEntered"
+guard = SubResource("Resource_3ndwj")
 delay_in_seconds = "0.0"
+
+[node name="Berserk" type="Node" parent="Watchman/StateChart/Root/BerserkState"]
+script = ExtResource("5_t72sy")
+
+[node name="ToNormal" type="Node" parent="Watchman/StateChart/Root/BerserkState/Berserk"]
+script = ExtResource("6_ka4my")
+to = NodePath("../../Normal")
+event = &"EnemyExited"
+delay_in_seconds = "3"
 
 [node name="Enemy" type="Node2D" parent="."]
 position = Vector2(135, 165)
@@ -76,5 +109,7 @@ texture = ExtResource("1_6rwdi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
 shape = SubResource("CircleShape2D_5m2nj")
 
-[connection signal="state_entered" from="Watchman/StateChart/Root/Idle" to="Watchman" method="OnStateEntered"]
-[connection signal="state_processing" from="Watchman/StateChart/Root/Observing" to="Watchman" method="OnObservingStateProcessing"]
+[connection signal="state_entered" from="Watchman/StateChart/Root/AlertState/Idle" to="Watchman" method="OnStateEntered"]
+[connection signal="state_processing" from="Watchman/StateChart/Root/AlertState/Observing" to="Watchman" method="OnObservingStateProcessing"]
+[connection signal="state_entered" from="Watchman/StateChart/Root/BerserkState/Normal" to="Watchman" method="OnNormalStateEntered"]
+[connection signal="state_entered" from="Watchman/StateChart/Root/BerserkState/Berserk" to="Watchman" method="OnBerserkStateEntered"]
