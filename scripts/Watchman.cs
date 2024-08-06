@@ -25,21 +25,11 @@ public partial class Watchman : Node2D
 
         PrintTree(GetTree().Root);
 
-        var idlenode = GetNode("StateChart/Root/AlertState/Idle");
-
-        var stateEnt = StateChartState.Of(idlenode);
-        // connect to the state_entered signal
-        stateEnt.Connect(StateChartState.SignalName.StateEntered, Callable.From(OnStateEntered));
-
-        // += OnStateEntered;
-
-        // var state = StateChartState.Of(GetNode("%Observing"));
-        // // connect to the state_entered signal
-        // state.Connect(StateChartState.SignalName.StateProcessing, Callable.From(OnObservingStateProcessing));
+        //var stateIdle = StateChartState.Of(GetNode("StateChart/Root/AlertState/Idle"));
+        //stateEnt.Connect(StateChartState.SignalName.StateEntered, Callable.From(OnStateEntered));
                 
-        var state = StateChartState.Of(GetNode("StateChart/Root/AlertState/Observing"));
-        //state.Connect(StateChartState.SignalName.StateProcessing, new Callable(this, nameof(OnObservingStateProcessing)));
-        state.Connect(StateChartState.SignalName.StateProcessing, Callable.From((float delta) => OnObservingStateProcessing(delta)));
+        //var stateObserving = StateChartState.Of(GetNode("StateChart/Root/AlertState/Observing"));
+        //state.Connect(StateChartState.SignalName.StateProcessing, Callable.From((float delta) => OnObservingStateProcessing(delta)));
     }
 
     private void OnAreaEntered2D(Area2D area)
